@@ -1,10 +1,11 @@
 import React, { Component } from "react"
-import { observer } from "mobx-react"
+import { observer, inject } from "mobx-react"
 
+@inject("InventoryStore")
 @observer
 class Item extends Component {
   checkItem = (e) => {
-    this.props.store.checkItem(e.target.value)
+    this.props.InventoryStore.checkItem(e.target.value)
   }
   editItem = () => {
     const item = this.props.item
@@ -13,12 +14,12 @@ class Item extends Component {
       `${item.price}`
     )
     if (newPrice && newPrice !== item.price) {
-      this.props.store.editItem(item.name, newPrice)
+      this.props.InventoryStore.editItem(item.name, newPrice)
     }
   }
   buyItem = () => {
     const item = this.props.item
-    this.props.store.buyItem(item.name, item.price)
+    this.props.InventoryStore.buyItem(item.name, item.price)
   }
   getPlural(item) {
     const lastCharIndex = item.length - 1

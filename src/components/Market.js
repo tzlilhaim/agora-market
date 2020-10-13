@@ -1,6 +1,7 @@
 import React, { Component } from "react"
-import { observer } from "mobx-react"
+import { observer, inject } from "mobx-react"
 
+@inject("InventoryStore")
 @observer
 class Market extends Component {
   handleChange = (e) => {
@@ -8,7 +9,7 @@ class Market extends Component {
     this.setState({ newItem: value })
   }
   addItem = () => {
-    this.props.store.addItem(this.state.newItem)
+    this.props.InventoryStore.addItem(this.state.newItem)
   }
   render() {
     return (

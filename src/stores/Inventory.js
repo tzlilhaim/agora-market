@@ -1,4 +1,4 @@
-import { observable, action } from "mobx"
+import { observable, action, computed } from "mobx"
 import { Item } from "./Item"
 
 export class Inventory {
@@ -6,6 +6,9 @@ export class Inventory {
   @action checkItem = (itemName) => {
     let item = this.items.find((i) => i.name === itemName)
     item.completed = !item.completed
+  }
+  @computed get numItems() {
+    return this.items.length
   }
   addItem = (name, price = 0, quantity = 1) => {
     let existingItem = this.items.find((item) => item.name === name)
